@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="api-server-log" status="info" strict="true">
+    <Properties>
+        <property name="logpattern">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level traceId=[%X{traceId}] [%t] %c{1} - %msg%n</property>
+    </Properties>
+    <Filter type="ThresholdFilter" level="info" />  
+   
+	<Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logpattern}" />
+        </Console>
+    </Appenders> 
+    
+	<Loggers>
+		<Logger name="com.poc" level="info" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.apache.kafka" level="error" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.springframework" level="info" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Root level="INFO" additivity="false">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
+
